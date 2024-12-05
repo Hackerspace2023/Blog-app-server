@@ -38,4 +38,4 @@ or content management system (CMS) where users can share ideas, articles, or sto
 
   ## Forkers
 
-  [![Forkers repo roster for @Hackerspace2023/Blog-app-server.git](https://reporoster.com/forks/Hackerspace2023/Blog-app-server.git)](https://github.com/Hackerspace2023/Blog-app-server.git/network/members)
+[![Forkers repo roster for @Hackerspace2023/Blog-app-server](https://reporoster.com/forks/Hackerspace2023/Blog-app-server)](https://github.com/Hackerspace2023/Blog-app-server/network/members)
