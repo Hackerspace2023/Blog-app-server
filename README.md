@@ -35,3 +35,7 @@ or content management system (CMS) where users can share ideas, articles, or sto
 - **bcrypt.js**: A library for hashing passwords to ensure secure user authentication.
 - **jsonwebtoken (JWT)**: A compact and self-contained way to securely transmit user information.
 - **dotenv**: For managing environment variables securely.
+
+  ## Forkers
+
+  [![Forkers repo roster for @Hackerspace2023/Blog-app-server.git](https://reporoster.com/forks/Hackerspace2023/Blog-app-server.git)](https://github.com/Hackerspace2023/Blog-app-server.git/network/members)
