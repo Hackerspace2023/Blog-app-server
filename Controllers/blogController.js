@@ -126,4 +126,43 @@ const toggleBookmark = asyncHandler(async (req, res) => {
   }
 });
 
-export { createPost, addComment, toggleLike, toggleBookmark };
+const searchBlogsByTitle = asyncHandler(async (req, res) => {
+  const { title } = req.query; 
+
+  if (!title) {
+    res.status(400);
+    throw new Error("Title is required to search for blogs!");
+  }
+
+  // Search for blogs with a matching title (case-insensitive)
+  const blogs = await Blog.find({ title: { $regex: title, $options: "i" } }).populate(
+    "author", 
+    "username name" 
+  );
+
+  if (!blogs || blogs.length === 0) {
+    res.status(404);
+    throw new Error("No blogs found with the given title!");
+  }
+
+  // Return the blogs with author details
+  res.status(200).json({
+    message: "Blogs fetched successfully!",
+    blogs: blogs.map((blog) => ({
+      id: blog._id,
+      title: blog.title,
+      content: blog.content,
+      tags: blog.tags,
+      author: blog.author.username, 
+      name: blog.author.name, 
+      likes: blog.likes,
+      comments: blog.comments.length,
+      bookmarks: blog.bookmarks.length,
+      createdAt: blog.createdAt,
+      updatedAt: blog.updatedAt,
+    })),
+  });
+});
+
+
+export { createPost, addComment, toggleLike, toggleBookmark, searchBlogsByTitle };
