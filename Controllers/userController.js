@@ -5,9 +5,9 @@ import generateToken from "../Utils/createToken.js";
 
 // Create User Function
 const createUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name,username, email, password } = req.body;
 
-  if (!name || !email || !password) {
+  if (!name || !email || !password || !username) {
     res.status(400);
     throw new Error("All fields are required!");
   }
@@ -27,6 +27,7 @@ const createUser = asyncHandler(async (req, res) => {
   // Create a new user
   const newUser = new User({
     name,
+    username,
     email,
     password: hashedPassword,
   });
@@ -35,6 +36,7 @@ const createUser = asyncHandler(async (req, res) => {
     generateToken(res, newUser._id);
     res.status(201).json({
       _id: newUser._id,
+      username: newUser.username,
       name: newUser.name,
       email: newUser.email,
     });
