@@ -88,7 +88,7 @@ const deleteBlogPost = asyncHandler(async (req, res) => {
 const getUserBlogPosts = asyncHandler(async (req, res) => {
   try {
     // Fetch all blog posts for the logged-in user
-    const blogPosts = await BlogPost.find({ author: req.user._id }).select("title _id");
+    const blogPosts = await Blog.find({ author: req.user._id }).select("title _id");
 
     if (!blogPosts || blogPosts.length === 0) {
       return res.status(404).json({ message: "No blog posts found" });

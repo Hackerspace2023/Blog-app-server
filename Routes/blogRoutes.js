@@ -15,7 +15,7 @@ import { authenticate } from "../Middlewares/authMiddleware.js"; // Middleware t
 const router = express.Router();
 
 // Route to create a new post
-router.route("/").post(authenticate, createPost).get(authenticate,getUserBlogPosts);
+router.route("/").post(authenticate, createPost);
 router.post("/:id/comments", authenticate, addComment);
 router.post("/:postId/like", authenticate, toggleLike);
 router.post("/:postId/bookmark", authenticate, toggleBookmark);
@@ -24,5 +24,5 @@ router
   .route("/:id")
   .put(authenticate, updateBlogPost)
   .delete(authenticate, deleteBlogPost);
-
+router.get("/postlist", authenticate,getUserBlogPosts);
 export default router;
