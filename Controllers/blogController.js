@@ -64,6 +64,27 @@ const updateBlogPost = asyncHandler(async (req, res) => {
   }
 });
 
+const deleteBlogPost = asyncHandler(async (req, res) => {
+  try {
+    const blogPost = await Blog.findById(req.params.id);
+
+    if (!blogPost) {
+      return res.status(404).json({ error: "Blog post not found" });
+    }
+
+    // Ensure the current user is the author of the blog post
+    if (blogPost.author.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ error: "You are not authorized to delete this blog post" });
+    }
+
+    await blogPost.deleteOne();
+
+    res.status(200).json({ message: "Blog post deleted successfully!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+});
 
 const addComment = asyncHandler(async (req, res) => {
   const { comment } = req.body;
@@ -201,4 +222,4 @@ const searchBlogsByTitle = asyncHandler(async (req, res) => {
 });
 
 
-export { createPost, addComment, toggleLike, toggleBookmark, searchBlogsByTitle, updateBlogPost };
+export { createPost, addComment, toggleLike, toggleBookmark, searchBlogsByTitle, updateBlogPost, deleteBlogPost };
