@@ -41,7 +41,7 @@ const createUser = asyncHandler(async (req, res) => {
 
 // Login Function for Registered Accounts
 const loginUser = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password } = req.fields;
 
   const existingUser = await User.findOne({ email });
   if (existingUser) {

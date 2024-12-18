@@ -6,7 +6,7 @@ import { authenticate } from "../Middlewares/authMiddleware.js"; // Middleware t
 
 
 router.route("/").post(formidable(), createUser);
-router.post("/auth", loginUser);
+router.post("/auth", formidable(), loginUser);
 router.post("/logout", logoutCurrentUser);
 
 router
